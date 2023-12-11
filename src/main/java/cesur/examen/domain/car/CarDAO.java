@@ -25,6 +25,19 @@ public class CarDAO implements DAO<Car> {
 
         /* Implement method here */
         //test git
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+            session.save(car);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
         return car;
     }
 
@@ -54,7 +67,17 @@ public class CarDAO implements DAO<Car> {
 
         /* Implement method here */
 
-        return out;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<Car> cars = new ArrayList<>();
+        try {
+            String query = "from Car where manufacturer = :m";
+            cars = session.createQuery(query, Car.class).setParameter("m", manufacturer).list();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return cars;
     }
 
 

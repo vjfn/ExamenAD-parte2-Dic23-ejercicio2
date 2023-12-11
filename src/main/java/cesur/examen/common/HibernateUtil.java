@@ -10,8 +10,8 @@ import org.hibernate.cfg.Configuration;
  * EXAMEN DE ACCESO A DATOS
  * Diciembre 2023
  *
- * Nombre del alumno:
- * Fecha:
+ * Nombre del alumno:Victor Jesus Fernandez Noguer
+ * Fecha: 11/12/2023
  *
  * No se permite escribir en consola desde las clases DAO, Service y Utils usando System.out.
  * En su lugar, usa log.info(), log.warning() y log.severe() para mostrar información interna
@@ -33,11 +33,11 @@ public class HibernateUtil {
     static{
         log.info("Loading Hibernate configuration...");
         try {
+            /* Implement method here */
+            Configuration cfg = new Configuration();
+            sessionFactory = cfg.configure().buildSessionFactory();
 
-            /* Complete method here */
-            sessionFactory = null;
-
-            log.info("SessionFactory not created yet!");
+            log.info("SessionFactory created!");
         } catch(Exception ex){
             log.severe("Something fails in buildSessionFactory()");
             log.severe(ex.getMessage());
